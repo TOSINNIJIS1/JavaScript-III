@@ -8,13 +8,31 @@
   Each constructor function has unique properties and methods that are defined in their block comments below:
 */
   
+function GameObject (parentAttributes){
+	this.createdAt = parentAttributes.createdAt;
+	this.name = parentAttributes.name;
+	this.dimension = parentAttributes.dimension;
+}
+
+GameObject.prototype.deestroy = function() {
+	return `${this.name} was removed from the game.`
+}
 /*
+
+
   === GameObject ===
   * createdAt
   * name
   * dimensions (These represent the character's size in the video game)
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
+function CharacterStats (childAttributes){
+	this.healthPoints = childAttributes.healthPoints;
+}
+CharacterStats.prototype.takedamage = function {
+	CharacterStats.prototype = Object.create(GameObject.prototype);
+	return `${this.name} took damage.`
+}
 
 /*
   === CharacterStats ===
@@ -23,6 +41,16 @@
   * should inherit destroy() from GameObject's prototype
 */
 
+function Humanoid (attributes){
+	this.team = attributes.team;
+	this.weapons = attributes.weapons;
+	this.language = attributes.language;
+}
+Humanoid.prototype.greet = function {
+	Humanoid.prototype = Object.create (CharacterStats.prototype);
+	return `${this.name} offers a greeting in ${this.language}.`
+	
+}
 /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
   * team
@@ -42,7 +70,7 @@
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
 /*
-  const mage = new Humanoid({
+ 1. const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
       length: 2,
@@ -58,7 +86,7 @@
     language: 'Common Tongue',
   });
 
-  const swordsman = new Humanoid({
+ 2. const swordsman = new Humanoid({
     createdAt: new Date(),
     dimensions: {
       length: 2,
@@ -75,7 +103,7 @@
     language: 'Common Tongue',
   });
 
-  const archer = new Humanoid({
+ 3. const archer = new Humanoid({
     createdAt: new Date(),
     dimensions: {
       length: 1,
